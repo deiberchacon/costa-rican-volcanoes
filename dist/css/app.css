@@ -4,8 +4,7 @@
 
 body {
   font-size: 16px;
-  background-color: #212121;
-  color: #F5F5F5;
+  background-color: #F5F5F5;
   font-family: 'Roboto Condensed', sans-serif; }
 
 .page-container {
@@ -13,6 +12,8 @@ body {
   margin: 0 auto; }
 
 .page-header {
+  background-color: #212121;
+  color: #F5F5F5;
   width: 100%;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
   z-index: 9999; }

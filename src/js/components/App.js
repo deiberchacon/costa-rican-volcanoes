@@ -27,7 +27,7 @@ class App extends React.Component {
         return (
             <div className="page">
                 <header className="page-header">
-                    <h1 className="page-title">Volcanes de Costa Rica</h1>
+                    <h1 className="page-title">Volcanes Costarricenses</h1>
                     <nav className="page-nav">
                         <TabBar handleClick={this.handleClick} active={this.state.active} />
                     </nav>
