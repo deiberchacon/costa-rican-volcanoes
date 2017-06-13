@@ -1,11 +1,10 @@
 import React from 'react';
-import { findDOMNode } from 'react-dom';
 
 export default class TabBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: 'turrialba'
+            selected: this.props.active
         };
         this.onClick = this.onClick.bind(this);
     }
@@ -33,7 +32,7 @@ export default class TabBar extends React.Component {
                         onClick={ this.onClick } 
                         data-volcano="turrialba" 
                     >
-                        Turriaba
+                        Turrialba
                     </a>
                 </li>
                 <li className="list-item">

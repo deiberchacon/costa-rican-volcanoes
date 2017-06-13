@@ -1,6 +1,6 @@
 # Costa Rican Volcanoes
 
-Show live images of Costa Rica Volcanoes.
+Show live images of Costa Rican Volcanoes.
 
 ## Demo
 

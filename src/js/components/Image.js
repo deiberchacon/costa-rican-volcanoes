@@ -5,13 +5,13 @@ export default class Image extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            imageUpdate: props.source,
+            imageUpdate: this.props.source,
             loading: true
         };
         this.handleImageLoaded = this.handleImageLoaded.bind(this);
     }
     
-    componentWillMount() {
+    componentDidMount() {
         this.timerID = setInterval(
             () => this.handleImageChange(),
             1000
