@@ -4,47 +4,40 @@ export default class TabBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: this.props.active
+            selected: 0
         };
-        this.onClick = this.onClick.bind(this);
     }
     
-    setActive() {
-        this.setState({ selected: this.props.active });
-    }
-
-    isActive(volcanoItem) {
-        return (volcanoItem === this.state.selected ? 'active' : null);
-    }
-    
-    onClick(e) {
-        this.setActive();
-        this.props.handleClick(e);
+    handleClick(index) {
+        this.props.handleClick(event);
+        this.setState({ selected: index });
     }
     
     render() {
         return (
             <ul className="page-nav-list">
-                <li className="list-item">
-                    <a 
-                        href="javascript:(void);" 
-                        className={ this.isActive('turrialba') } 
-                        onClick={ this.onClick } 
-                        data-volcano="turrialba" 
-                    >
-                        Turrialba
-                    </a>
-                </li>
-                <li className="list-item">
-                    <a 
-                        href="javascript:(void);" 
-                        className={ this.isActive('poas') } 
-                        onClick={ this.onClick } 
-                        data-volcano="poas" 
-                    >
-                        Poás
-                    </a>
-                </li>
+                {
+                    this.props.volcanoes.map((volcano, i) => {
+                        var style = '';
+                        
+                        if (this.state.selected == i) {
+                            style = 'active';
+                        }
+                        
+                        return (
+                            <li className="list-item">
+                                <a
+                                    href="#"
+                                    className={style}
+                                    onClick={this.handleClick.bind(this, i)}
+                                    data-volcano={volcano.id}
+                                >
+                                    {volcano.title}
+                                </a>
+                            </li>
+                        );
+                    })
+                }
             </ul>
         )
     }

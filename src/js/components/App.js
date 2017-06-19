@@ -2,6 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TabBar from './TabBar';
 import Image from './Image';
+import Banner from './Banner';
+
+const volcanoesData = [
+    {
+        id: 'turrialba',
+        title: 'Turrialba'
+    },
+    {
+        id: 'craterpoas',
+        title: 'Poás'
+    }
+];
 
 class App extends React.Component {
     constructor(props) {
@@ -27,15 +39,16 @@ class App extends React.Component {
         return (
             <div className="page">
                 <header className="page-header">
-                    <h1 className="page-title">Volcanes Costarricenses</h1>
+                    <Banner />
+                    <a href="/" className="page-logo">
+                        <h1 className="page-logo-title">Volcanes Costarricenses</h1>
+                    </a>
                     <nav className="page-nav">
-                        <TabBar handleClick={this.handleClick} active={this.state.active} />
+                        <TabBar handleClick={this.handleClick} active={this.state.active} volcanoes={volcanoesData} />
                     </nav>
                 </header>
                 <div className="page-container">
-                    <div className="image-container">
-                        <Image source={this.state.volcanoUrl} />
-                    </div>
+                    <Image source={this.state.volcanoUrl} />
                 </div>
             </div>
         );

@@ -5,51 +5,67 @@ export default class Image extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            imageUpdate: this.props.source,
-            loading: true
+            imageStatus: props.source ? 'loading' : 'noimage',
+            source: props.source
         };
-        this.handleImageLoaded = this.handleImageLoaded.bind(this);
+    }
+   
+    setFileStatus(status) {
+       this.setState({ imageStatus: status });
+    }
+    
+    componentWillReceiveProps(nextProps) {
+        if (this.props.source != nextProps.source) {
+            this.setState({
+                imageStatus: nextProps.source ? 'loading' : 'noimage'
+            });
+        }
     }
     
     componentDidMount() {
-        this.timerID = setInterval(
-            () => this.handleImageChange(),
-            1000
-        );
+        this.timerID = setInterval(() => {
+            this.handleImageChange();
+        }, 1000);
     }
     
     componentWillUnmount() {
         clearInterval(this.timerID);
     }
     
-    handleImageLoaded() {
-        if (this.state.loading) {
-            this.setState({ loading: false });
-        }
-    }
-    
-    handleImageError() {
-        this.setState({ imageUpdate: this.props.source });
-    }
-    
     handleImageChange() {
-        let date = new Date();
-        let time = date.getTime();
-        this.setState({ imageUpdated: `${this.props.source}?${time}` });
+        const date = new Date();
+        const time = date.getTime();
+        this.setState({ source: `${this.props.source}?${time}` });
     }
     
     render() {
         return (
-            <div>
-                <img 
+            <div className="image-container">
+                {(() => {
+                    const status = {
+                        'loading': () => {
+                            return (<Spinner />);
+                        },
+                        'loaded': () => {
+                            return null;
+                        },
+                        'failed': () => {
+                            return (<p className="error-msg">Error al cargar la imagen</p>);
+                        },
+                        'noimage': () => {
+                            return (<p className="error-msg">No hay imagen</p>);
+                        }
+                    }
+                    return status[this.state.imageStatus]()
+                })()}
+                <img
                     className="image" 
-                    src={this.state.imageUpdated} 
-                    onLoad={this.handleImageLoaded.bind(this)} 
-                    onError={this.handleImageError.bind(this)} 
+                    src={this.state.source}
+                    onLoad={this.setFileStatus.bind(this, 'loaded')}
+                    onError={this.setFileStatus.bind(this, 'failed')}
+                    style={this.state.imageStatus == 'loaded' ? {display: 'block'} : {display: 'none'}}
                 />
-                { this.state.loading ? <Spinner /> : null }
             </div>
-        ); 
-        
+        );
     }
 }
