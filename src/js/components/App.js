@@ -40,7 +40,7 @@ class App extends React.Component {
             <div className="page">
                 <header className="page-header">
                     <Banner />
-                    <a href="/" className="page-logo">
+                    <a href="https://deiberdev.github.io/costa-rican-volcanoes/" className="page-logo">
                         <h1 className="page-logo-title">Volcanes Costarricenses</h1>
                     </a>
                     <nav className="page-nav">
