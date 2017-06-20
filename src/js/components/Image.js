@@ -14,12 +14,10 @@ export default class Image extends React.Component {
        this.setState({ imageStatus: status });
     }
     
-    componentWillReceiveProps(nextProps) {
-        if (this.props.source != nextProps.source) {
-            this.setState({
-                imageStatus: nextProps.source ? 'loading' : 'noimage'
-            });
-        }
+    handleImageChange() {
+        const date = new Date();
+        const time = date.getTime();
+        this.setState({ source: `${this.props.source}?${time}` });
     }
     
     componentDidMount() {
@@ -28,14 +26,20 @@ export default class Image extends React.Component {
         }, 1000);
     }
     
-    componentWillUnmount() {
-        clearInterval(this.timerID);
+    componentWillReceiveProps(nextProps) {
+        if (this.props.source != nextProps.source) {
+            this.setState({
+                imageStatus: nextProps.source ? 'loading' : 'noimage'
+            });
+        }
     }
     
-    handleImageChange() {
-        const date = new Date();
-        const time = date.getTime();
-        this.setState({ source: `${this.props.source}?${time}` });
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextState.source !== this.state.source;
+    }
+    
+    componentWillUnmount() {
+        clearInterval(this.timerID);
     }
     
     render() {

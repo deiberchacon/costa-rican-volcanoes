@@ -6,12 +6,30 @@ import Banner from './Banner';
 
 const volcanoesData = [
     {
-        id: 'turrialba',
-        title: 'Turrialba'
+        title: 'Turrialba',
+        cameras: [
+            {
+                id: 'turrialba',
+                title: 'Cámara 1'
+            },
+            {
+                id: 'irazu',
+                title: 'Cámara 2'
+            }
+        ]
     },
     {
-        id: 'craterpoas',
-        title: 'Poás'
+        title: 'Poás',
+        cameras: [
+            {
+                id: 'poas',
+                title: 'Cámara 1'
+            },
+            {
+                id: 'craterpoas',
+                title: 'Cámara 2'
+            }
+        ]
     }
 ];
 
@@ -38,8 +56,8 @@ class App extends React.Component {
     render() {
         return (
             <div className="page">
+                <Banner />
                 <header className="page-header">
-                    <Banner />
                     <a href="https://deiberdev.github.io/costa-rican-volcanoes/" className="page-logo">
                         <h1 className="page-logo-title">Volcanes Costarricenses</h1>
                     </a>

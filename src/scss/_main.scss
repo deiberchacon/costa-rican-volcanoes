@@ -30,7 +30,8 @@ body {
         text-decoration: none;
         
         &-title {
-            line-height: 54px;
+            padding: 10px 10px; 
+            line-height: 34px;
             text-transform: uppercase;
             text-align: center;
             font-size: 1em;
@@ -46,11 +47,16 @@ body {
             background-color: $secundary-color;
             display: flex;
             justify-content: space-around;
+            position: relative;
             
-            li {
+            li.list-item {
                 list-style: none;
                 text-align: center;
                 width: 50%;
+                
+                [class^='icon'] {
+                    margin-left: 10px;
+                }
                 
                 a {
                     line-height: 40px;
@@ -60,9 +66,24 @@ body {
                     font-size: 0.9em;
                     
                     &:hover {
-                        background-color: $hover-color;
+                        background-color: $primary-hover-color;
+                        color:  $secundary-color !important;
                     }
                 }
+                
+                ul.dropdown-list {
+                    display: none;
+                    transition: all .4s;
+                    z-index: 9999;
+                    position: absolute;
+                    width: 50%;
+                    background-color: $secundary-color;
+                    
+                    .list-item {
+                        width: 100%;
+                    }
+                }
+                
             }
         }
     }
@@ -93,5 +114,13 @@ body {
 
 .error-msg {
     margin-top: calc(50vh - 100px);
+}
+
+.show {
+    display: block !important;
+}
+
+.hide {
+    display: none !important;
 }
 

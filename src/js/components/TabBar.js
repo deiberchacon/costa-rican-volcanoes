@@ -1,16 +1,38 @@
 import React from 'react';
+import jQuery from 'jquery';
+
 
 export default class TabBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: 0
+            selectedParent: 0,
+            selectedChildren: 0
         };
     }
     
-    handleClick(index) {
+    handleClick(parentIndex, childrenIndex) {
         this.props.handleClick(event);
-        this.setState({ selected: index });
+        this.setState({ 
+            selectedParent: parentIndex,
+            selectedChildren: childrenIndex
+        });
+    }
+    
+    handleNavClick() {
+        const e = event;
+        e.preventDefault();
+        e.stopPropagation();
+        
+        var dropdown = (jQuery(e.target).prop('tagName') != 'SPAN' ? jQuery(e.target).next() : jQuery(e.target).parent().next());
+        dropdown.toggle();
+        
+        jQuery('html').click(function () {
+            if (jQuery(event.target).closest(dropdown).length === 0) {
+            
+                dropdown.hide();
+            }
+        });
     }
     
     render() {
@@ -18,22 +40,45 @@ export default class TabBar extends React.Component {
             <ul className="page-nav-list">
                 {
                     this.props.volcanoes.map((volcano, i) => {
-                        var style = '';
+                        var styleParent = '';
                         
-                        if (this.state.selected == i) {
-                            style = 'active';
+                        if (this.state.selectedParent == i) {
+                            styleParent = 'active';
                         }
                         
                         return (
                             <li className="list-item">
                                 <a
                                     href="#"
-                                    className={style}
-                                    onClick={this.handleClick.bind(this, i)}
-                                    data-volcano={volcano.id}
+                                    className={styleParent}
+                                    onClick={this.handleNavClick}
                                 >
-                                    {volcano.title}
+                                    {volcano.title} <span className="icon-chevron-down"></span>
                                 </a>
+                                <ul className="dropdown-list">
+                                    {
+                                        volcano.cameras.map((camera, j) => {
+                                            var styleChildren = '';
+                                            
+                                            if (this.state.selectedParent == i && this.state.selectedChildren == j) {
+                                                styleChildren = 'active';
+                                            }
+                                            
+                                            return (
+                                                <li className="list-item">
+                                                    <a
+                                                        href="#"
+                                                        className={styleChildren}
+                                                        onClick={this.handleClick.bind(this, i, j)}
+                                                        data-volcano={camera.id}
+                                                        >
+                                                            {camera.title}
+                                                    </a>
+                                                </li>
+                                            );
+                                        })
+                                    }
+                                </ul>
                             </li>
                         );
                     })
