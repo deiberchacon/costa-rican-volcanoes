@@ -23,7 +23,8 @@ body {
   text-align: center;
   text-decoration: none; }
   .page-logo-title {
-    line-height: 54px;
+    padding: 10px 10px;
+    line-height: 34px;
     text-transform: uppercase;
     text-align: center;
     font-size: 1em;
@@ -34,19 +35,32 @@ body {
 .page-nav-list {
   background-color: #F5F5F5;
   display: flex;
-  justify-content: space-around; }
-  .page-nav-list li {
+  justify-content: space-around;
+  position: relative; }
+  .page-nav-list li.list-item {
     list-style: none;
     text-align: center;
     width: 50%; }
-    .page-nav-list li a {
+    .page-nav-list li.list-item [class^='icon'] {
+      margin-left: 10px; }
+    .page-nav-list li.list-item a {
       line-height: 40px;
       color: #212121;
       text-decoration: none;
       display: block;
       font-size: 0.9em; }
-      .page-nav-list li a:hover {
-        background-color: #E0E0E0; }
+      .page-nav-list li.list-item a:hover {
+        background-color: #055fa6;
+        color: #F5F5F5 !important; }
+    .page-nav-list li.list-item ul.dropdown-list {
+      display: none;
+      transition: all .4s;
+      z-index: 9999;
+      position: absolute;
+      width: 50%;
+      background-color: #F5F5F5; }
+      .page-nav-list li.list-item ul.dropdown-list .list-item {
+        width: 100%; }
 
 .image-container {
   max-width: 100%;
@@ -67,6 +81,12 @@ body {
 
 .error-msg {
   margin-top: calc(50vh - 100px); }
+
+.show {
+  display: block !important; }
+
+.hide {
+  display: none !important; }
 
 .spinner {
   width: 40px;
@@ -99,10 +119,33 @@ body {
   height: 1px; }
 
 .banner .blue {
-  background-color: #1A237E; }
+  background-color: #01579B; }
 
 .banner .white {
   background-color: #FAFAFA; }
 
 .banner .red {
   background-color: #B71C1C; }
+
+@font-face {
+  font-family: 'icomoon';
+  src: url("../icons/icomoon.eot?okd58d");
+  src: url("../icons/icomoon.eot?okd58d#iefix") format("embedded-opentype"), url("../icons/icomoon.ttf?okd58d") format("truetype"), url("../icons/icomoon.woff?okd58d") format("woff"), url("../icons/icomoon.svg?okd58d#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.icon-chevron-down:before {
+  content: "\e900"; }
