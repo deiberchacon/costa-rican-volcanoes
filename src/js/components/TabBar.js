@@ -28,10 +28,7 @@ export default class TabBar extends React.Component {
         dropdown.toggle();
         
         jQuery('html').click(function () {
-            if (jQuery(event.target).closest(dropdown).length === 0) {
-            
-                dropdown.hide();
-            }
+            dropdown.hide();
         });
     }
     
